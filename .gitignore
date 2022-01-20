@@ -1,0 +1,7 @@
+*.json
+backend_school_web_app/
+db*
+__init__.py
+__pycache__
+settings.py
+migrations
