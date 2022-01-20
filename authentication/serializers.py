@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 
 # Register Serializer
+
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -16,8 +17,3 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 
-# User Serializer
-# class UserSerializer(serializers.ModelSerializer):
-    # class Meta:
-        # model = User
-        # fields = ('id', 'username', 'email')
