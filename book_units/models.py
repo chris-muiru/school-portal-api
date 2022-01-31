@@ -14,6 +14,8 @@ class Units(models.Model):
     year=models.CharField(default='y1s1',choices=YEAR_CHOICES,max_length=20)
     unit_name=models.CharField(max_length=200)
     unit_code=models.CharField(max_length=10)
+    def __str__(self):
+        return self.unit_name
 
 # Create your models here.
 
@@ -32,4 +34,6 @@ class Selected_units(models.Model):
     year=models.CharField(default='y1s1',choices=YEAR_CHOICES,max_length=20)
     unit_name=models.CharField(max_length=200)
     unit_code=models.CharField(max_length=10)
+    def __str__(self):
+        return self.unit_name
 
