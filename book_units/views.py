@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from .serializers import Get_units_serializer,Booked_units_serializer
 from .models import Selected_units,Units
 
@@ -8,6 +7,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 
+# get all users
 class Get_Units(APIView):
     def get(self,request):
         queryset=Units.objects.all()
@@ -24,7 +24,7 @@ class Set_selected_units(APIView):
                     serializer.save()
         return Response(request.data,status=status.HTTP_201_CREATED)
 
-# get selected units by user
+# get all selected units by user
 class GetSelectedUnits(APIView):
     def get(self,requet):
         queryset=Selected_units.objects.all()
