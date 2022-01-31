@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class UserCredentialsModel(models.Model):
+class StudentDetailsModel(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     school_id=models.CharField(max_length=100)
     school_email=models.EmailField(max_length=254)
