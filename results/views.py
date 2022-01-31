@@ -4,7 +4,7 @@ from .models import Result
 # from .serializers import ResultsSerializer
 
     
-
+# get student results
 class Student_result(APIView):
     def get(self,request):
         queryset=Result.objects.select_related('unit')
