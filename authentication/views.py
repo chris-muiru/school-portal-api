@@ -15,7 +15,9 @@ class RegisterUser(APIView):
             data['email'] = account.email
             data['username'] = account.username
             token=Token.objects.get(user=account).key
+            #token= user.auth_token.key
             data['token'] = token
             return Response(data,status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 # Create your views here.
+
