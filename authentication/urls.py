@@ -5,3 +5,4 @@ urlpatterns=[
     path('register/',RegisterUser.as_view(),name="register-user"),
     path('api-token-auth/',views.obtain_auth_token,name="auth") 
 ]
+
