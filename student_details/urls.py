@@ -3,5 +3,5 @@ from .views import GetUserCredentials
 
 
 urlpatterns = [
-    path('student-details/',GetUserCredentials.as_view(),name="student-credentials")
+    path('student-detail/',GetUserCredentials.as_view(),name="student-credentials")
 ]
