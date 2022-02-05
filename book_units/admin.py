@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Units,Selected_units
-admin.site.register(Units)
-admin.site.register(Selected_units)
+from .models import BookedUnit, Unit
+admin.site.register(Unit)
+admin.site.register(BookedUnit)
 # Register your models here.
