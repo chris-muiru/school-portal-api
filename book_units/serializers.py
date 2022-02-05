@@ -1,14 +1,17 @@
+from select import select
+from httpcore import request
 from rest_framework import serializers
 
-from .models import Selected_units,Units
+from .models import BookedUnit,Unit
 
 class Get_units_serializer(serializers.ModelSerializer):
     class Meta:
-        model=Units
+        model=Unit
         fields=['id','year','unit_name','unit_code']
 
-
-class Booked_units_serializer(serializers.ModelSerializer):
+class Booked_units_serializer(serializers.ModelSerializer):    
+    user=serializers.ReadOnlyField(source='user.username')
     class Meta:
-        model=Selected_units
-        fields=['id','year','unit_name','unit_code']
+        model=BookedUnit
+        fields=['id','user','unit_name','unit_code','year']
+    
