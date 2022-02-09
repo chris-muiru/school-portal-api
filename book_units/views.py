@@ -1,8 +1,6 @@
-from httpcore import request
 from rest_framework.exceptions import ValidationError
 from .serializers import Get_units_serializer,Booked_units_serializer
 from .models import BookedUnit,Unit
-
 from rest_framework.decorators import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -10,7 +8,6 @@ from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from .serializers import Booked_units_serializer
 from rest_framework import permissions
-# get all users
 from rest_framework import  generics
 
 from book_units import serializers
