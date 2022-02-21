@@ -13,8 +13,9 @@ from rest_framework import  generics
 from book_units import serializers
 
 class Get_Units(generics.ListAPIView):
-    querset=Unit.objects.all()
-    serializer_class=Get_units_serializer
+        queryset=Unit.objects.all()
+        serializer_class=Get_units_serializer
+
 
 class SetSelectedUnits(generics.CreateAPIView):
     serializer_class=Booked_units_serializer
