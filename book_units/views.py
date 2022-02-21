@@ -16,6 +16,9 @@ class Get_Units(generics.ListAPIView):
         queryset=Unit.objects.all()
         serializer_class=Get_units_serializer
 
+# class Unit_Count(APIView):
+    # def get(self,request):
+        
 
 class SetSelectedUnits(generics.CreateAPIView):
     serializer_class=Booked_units_serializer
