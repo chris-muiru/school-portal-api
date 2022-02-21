@@ -3,15 +3,19 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 
 
-# Register Serializer
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
-class RegisterSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'email', 'password')
-        # make password read only
-        extra_kwargs = {'password': {'write_only': True}}
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
 
-    def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
-        return user
+        # Add custom claims
+        token['name'] = user.name
+        # ...
+
+        return token
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
