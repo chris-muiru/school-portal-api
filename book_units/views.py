@@ -36,6 +36,5 @@ class GetSelectedUnits(generics.ListAPIView):
         queryset=BookedUnit.objects.filter(user=self.request.user)
         return queryset
  
-
 # Create your views here.
 
