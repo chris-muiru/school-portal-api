@@ -25,6 +25,7 @@ class SetSelectedUnits(generics.CreateAPIView):
     def get_queryset(self):
         queryset=BookedUnit.objects.filter(user=self.request.user)
         return queryset
+        
     def perform_create(self,serializer):
         if BookedUnit.objects.filter(unit_code=serializer.validated_data['unit_code']).exists():
             raise ValidationError("already selected unit")
@@ -35,6 +36,9 @@ class GetSelectedUnits(generics.ListAPIView):
     def get_queryset(self):
         queryset=BookedUnit.objects.filter(user=self.request.user)
         return queryset
- 
+
+
+    
+
 # Create your views here.
 
