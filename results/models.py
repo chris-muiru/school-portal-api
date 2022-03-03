@@ -5,9 +5,9 @@ class Result(models.Model):
     unit=models.ForeignKey(BookedUnit,on_delete=models.CASCADE,default=None)    
     user=models.ForeignKey(User,on_delete=models.CASCADE,default=None)    
     marks=models.IntegerField()
-    grade=models.CharField(max_length=10)
+    grade=models.CharField(max_length=10,default='-')
 
     def __str__(self):
-        return f"{self.unit.unit_name}-{self.user.username}"
+        return f"{self.unit.unit_name}({self.user.username})"
 
 # Create your models here.
