@@ -10,4 +10,5 @@ class Result(models.Model):
     def __str__(self):
         return f"{self.unit.unit_name}({self.user.username})"
 
+    
 # Create your models here.

@@ -3,7 +3,6 @@ from rest_framework.response import Response
 from .models import Result
 from .serializers import ResultSerializer
 from rest_framework import status
-
 class Student_result(APIView):
     def get(self,request):
         queryset=Result.objects.filter(user__username=request.user)
