@@ -7,4 +7,3 @@ class FinanceConfig(AppConfig):
 
     def ready(self):
         from .signals import feeModelSignal
-

@@ -1,44 +1,54 @@
-from rest_framework.exceptions import ValidationError
-from .serializers import Get_units_serializer,Booked_units_serializer
-from .models import BookedUnit,Unit
+from .serializers import Get_units_serializer, Booked_units_serializer
+from .models import BookedUnit, Unit
 from rest_framework.decorators import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
-from rest_framework.parsers import JSONParser
 from .serializers import Booked_units_serializer
-from rest_framework import permissions
-from rest_framework import  generics
+from rest_framework import generics
 
 from book_units import serializers
 
+
 class Get_Units(generics.ListAPIView):
-        queryset=Unit.objects.all()
-        serializer_class=Get_units_serializer
+    queryset = Unit.objects.all()
+    serializer_class = Get_units_serializer
 
-# class Unit_Count(APIView):
-    # def get(self,request):
-        
 
-class SetSelectedUnits(generics.CreateAPIView):
-    serializer_class=Booked_units_serializer
-    def get_queryset(self):
-        queryset=BookedUnit.objects.filter(user=self.request.user)
-        return queryset
-        
-    def perform_create(self,serializer):
-        if BookedUnit.objects.filter(unit_code=serializer.validated_data['unit_code']).exists():
-            raise ValidationError("already selected unit")
-        serializer.save(user=self.request.user)
-   
+
+class SetSelectedUnits(APIView):
+    def post(self, request):
+        serializer = Booked_units_serializer(data=request.data, many=True)
+        if serializer.is_valid():
+            for queryset in serializer.data:
+                if not BookedUnit.objects.filter(unit_code=queryset['unit_code']).exists():
+                    serializer.save(user=self.request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class GetSelectedUnits(generics.ListAPIView):
-    serializer_class=Booked_units_serializer
+    serializer_class = Booked_units_serializer
+
     def get_queryset(self):
-        queryset=BookedUnit.objects.filter(user=self.request.user)
+        queryset = BookedUnit.objects.filter(user=self.request.user)
         return queryset
 
 
-    
+class GetUnitsInfo(APIView):
+    def get(self, request):
+        try:
+            total_units = Unit.objects.all().count()
+            booked_units = BookedUnit.objects.all().count()
+            remaining_units = total_units - booked_units
+            data = {
+                "total_units": total_units,
+                "booked_units": booked_units,
+                "remaining_units": remaining_units
+            }
+            return Response(data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({"error": "error occurred "})
+
 
 # Create your views here.
-
