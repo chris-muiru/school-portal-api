@@ -22,7 +22,7 @@ class SetSelectedUnits(APIView):
         if serializer.is_valid():
             for queryset in serializer.data:
                 if not BookedUnit.objects.filter(unit_code=queryset['unit_code']).exists():
-                    serializer.save(user=self.request.user)
+                    serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -31,7 +31,7 @@ class GetSelectedUnits(generics.ListAPIView):
     serializer_class = Booked_units_serializer
 
     def get_queryset(self):
-        queryset = BookedUnit.objects.filter(user=self.request.user)
+        queryset = BookedUnit.objects.filter(user=request.user)
         return queryset
 
 
